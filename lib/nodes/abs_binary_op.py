@@ -1,5 +1,5 @@
-from .abs_operator import OperatorNode
 from .abs_node import Node
+from .abs_operator import OperatorNode
 
 
 class BinaryOp(OperatorNode):

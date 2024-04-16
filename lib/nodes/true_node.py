@@ -5,8 +5,9 @@ class TrueNode(ConstNode):
     def __init__(self):
         super().__init__()
 
+    @property
+    def value(self) -> bool:
+        return True
+
     def __str__(self) -> str:
         return "1"
-
-    def get_value(self) -> bool:
-        return True

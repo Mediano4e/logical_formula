@@ -8,3 +8,6 @@ class ConstNode(Node):
         if cls not in cls._instances:
             cls._instances[cls] = super().__new__(cls, *args, **kwargs)
         return cls._instances[cls]
+
+    def add_parent(self, parent_formula: str, parent) -> None:
+        return
