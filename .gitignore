@@ -1,2 +1,4 @@
 /venv
 /.idea
+/logical_formula/nodes/pycache
+/logical_formula/pycache

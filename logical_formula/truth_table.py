@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lib.logical_formula import LogicalFormula
+from logical_formula.logical_formula import LogicalFormula
 
 
 class TruthTable(object):
@@ -11,20 +11,33 @@ class TruthTable(object):
         del self._formula
 
     @property
-    def results(self) -> pd.Series:
-        return self._result_table.iloc[:, -1]
+    def results(self) -> pd.DataFrame:
+        result = self._result_table
+        if len(result.columns) == 1:
+            return result
+        return result.iloc[:, -1]
 
     @property
-    def true_results(self) -> pd.Series:
+    def true_results(self) -> pd.DataFrame:
         table = self._result_table
-        true_part = table.loc[table[table.columns[-1]]]
+        if len(table.columns) > 1:
+            true_part = table.loc[table[table.columns[-1]]].iloc[:, :-1]
+        else:
+            true_part = table.loc[table[table.columns[-1]]]
         return true_part
 
     @property
-    def false_results(self) -> pd.Series:
+    def false_results(self) -> pd.DataFrame:
         table = self._result_table
-        false_part = table.loc[~table[table.columns[-1]]]
+        if len(table.columns) > 1:
+            false_part = table.loc[~table[table.columns[-1]]].iloc[:, :-1]
+        else:
+            false_part = table.loc[~table[table.columns[-1]]]
         return false_part
+
+    @property
+    def table(self) -> pd.DataFrame:
+        return self._result_table
 
     def __get_results_from_formula(self) -> pd.DataFrame:
         table = pd.DataFrame(self._formula.table, index=[0])

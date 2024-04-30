@@ -1,4 +1,4 @@
-from lib.nodes import *
+from logical_formula.nodes import *
 
 
 class LogicalFormula(object):
